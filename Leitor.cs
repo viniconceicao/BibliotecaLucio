@@ -108,4 +108,23 @@ public class Leitor
             Console.WriteLine("Livro não encontrado.");
         }
     }
+
+    // Remover um livro, por exemplo, que foi perdido
+    public void RemoverLivroLeitor(int cpf, string tituloLivro)
+    {
+        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
+        // Procurando o leitor na lista de leitores pelo CPF
+        Livro livro = leitor.LivrosLeitor.Find(livro => livro.Titulo == tituloLivro);
+        // Procurando o livro na lista de livros do leitor pelo título
+
+        if (livro != null)
+        {
+            leitor.LivrosLeitor.Remove(livro);
+            // Removendo o livro da lista de livros do leitor
+        }
+        else
+        {
+            Console.WriteLine("Livro não encontrado.");
+        }
+    }
 }
