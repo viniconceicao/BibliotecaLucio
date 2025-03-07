@@ -71,6 +71,16 @@ public class Leitor
         // Removendo o leitor da lista de leitores
     }
 
+    /* Incluir os livros do leitor
+    public void IncluirLivroLeitor(int cpf, Livro livro)
+    {
+        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
+        // Procurando o leitor na lista de leitores pelo CPF
+        leitor.AdicionarLivro(livro);
+        // Adicionando o livro ao leitor
+    } */
+
+    // Incluir os livros do leitor
     public void ListarLivrosLeitor(int cpf)
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
