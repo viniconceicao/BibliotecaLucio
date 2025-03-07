@@ -127,4 +127,27 @@ public class Leitor
             Console.WriteLine("Livro não encontrado.");
         }
     }
+
+    // Doar um livro para outro leitor
+    public void DoarLivroLeitor(int cpfDoacao, int cpfDestino, string tituloLivro)
+    {
+        Leitor leitorDoacao = leitores.Find(leitor => leitor.CPF == cpfDoacao);
+        // Procurando o leitor que vai doar o livro na lista de leitores pelo CPF
+        Leitor leitorDestino = leitores.Find(leitor => leitor.CPF == cpfDestino);
+        // Procurando o leitor que vai receber o livro na lista de leitores pelo CPF
+        Livro livro = leitorDoacao.LivrosLeitor.Find(livro => livro.Titulo == tituloLivro);
+        // Procurando o livro na lista de livros do leitor que vai doar o livro pelo título
+
+        if (livro != null)
+        {
+            leitorDestino.LivrosLeitor.Add(livro);
+            // Adicionando o livro na lista de livros do leitor que vai receber o livro
+            leitorDoacao.LivrosLeitor.Remove(livro);
+            // Removendo o livro da lista de livros do leitor que vai doar o livro
+        }
+        else
+        {
+            Console.WriteLine("Livro não encontrado.");
+        }
+    }
 }
