@@ -23,3 +23,10 @@
 // - Ver método Exists de List
 // A busca pelo leitor deve ser realizado através do seu CPF
 // O usuário deve poder cadastrar quantos leitores ou livros ele desejar
+
+/* Alunos:
+    - Alisson Rafael da Cruz Velho
+    - Marcos Vinicius Arruda Vandresen
+    - Rodrigo Vaisam Bastos
+    - Vinicius de Liz da Conceição
+*/
