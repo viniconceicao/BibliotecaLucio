@@ -62,13 +62,5 @@ public class Leitor
         leitor.Idade = int.Parse(Console.ReadLine());
         // Pedindo a nova idade do leitor
     }
-
-    public void ExcluirLeitor(int cpf)
-    {
-        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
-        // Procurando o leitor na lista de leitores pelo CPF
-        leitores.Remove(leitor);
-        // Removendo o leitor da lista de leitores
-    }
 }
 // Depois resolver
