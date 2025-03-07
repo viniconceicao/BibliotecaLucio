@@ -70,4 +70,15 @@ public class Leitor
         leitores.Remove(leitor);
         // Removendo o leitor da lista de leitores
     }
+
+    public void ListarLivrosLeitor(int cpf)
+    {
+        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
+        // Procurando o leitor na lista de leitores pelo CPF
+        foreach (Livro livro in leitor.LivrosLeitor)
+        {
+            Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+            // Mostrando o título, escritor e editora do livro
+        }
+    }
 }
