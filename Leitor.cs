@@ -71,4 +71,3 @@ public class Leitor
         // Removendo o leitor da lista de leitores
     }
 }
-// Depois resolver
