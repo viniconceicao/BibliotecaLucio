@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ninad\\.nuget\\packages\\": {}
+    "C:\\Users\\viniv\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ninad\\OneDrive\\Documentos\\Sistemas de Informação\\Terceiro Semestre\\Desenvolvimento de Sistemas\\Biblioteca\\Biblioteca.csproj",
+      "projectUniqueName": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
       "projectName": "Biblioteca",
-      "projectPath": "C:\\Users\\ninad\\OneDrive\\Documentos\\Sistemas de Informação\\Terceiro Semestre\\Desenvolvimento de Sistemas\\Biblioteca\\Biblioteca.csproj",
-      "packagesPath": "C:\\Users\\ninad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ninad\\OneDrive\\Documentos\\Sistemas de Informação\\Terceiro Semestre\\Desenvolvimento de Sistemas\\Biblioteca\\obj\\",
+      "projectPath": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
+      "packagesPath": "C:\\Users\\viniv\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ninad\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\viniv\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"

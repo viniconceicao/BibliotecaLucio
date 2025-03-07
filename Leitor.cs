@@ -150,4 +150,51 @@ public class Leitor
             Console.WriteLine("Livro não encontrado.");
         }
     }
+
+    // Listar todos os leitores e seus respectivos livros
+    public void ListarLeitoresLivros()
+    {
+        foreach (Leitor leitor in leitores)
+        {
+            Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+            // Mostrando o nome, idade e CPF do leitor
+            foreach (Livro livro in leitor.LivrosLeitor)
+            {
+                Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+                // Mostrando o título, escritor e editora do livro
+            }
+        }
+    }
+
+    // Listar um leitor específico e seus respectivos livros
+    public void ListarLeitorLivros(int cpf)
+    {
+        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
+        // Procurando o leitor na lista de leitores pelo CPF
+        Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+        // Mostrando o nome, idade e CPF do leitor
+        foreach (Livro livro in leitor.LivrosLeitor)
+        {
+            Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+            // Mostrando o título, escritor e editora do livro
+        }
+    }
+
+    // Pesquisar por um livro específico, e mostrar os dados do leitor
+    public void PesquisarLivroLeitor(string tituloLivro)
+    {
+        foreach (Leitor leitor in leitores)
+        {
+            Livro livro = leitor.LivrosLeitor.Find(livro => livro.Titulo == tituloLivro);
+            // Procurando o livro na lista de livros do leitor pelo título
+
+            if (livro != null)
+            {
+                Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+                // Mostrando o nome, idade e CPF do leitor
+                Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+                // Mostrando o título, escritor e editora do livro
+            }
+        }
+    }
 }
