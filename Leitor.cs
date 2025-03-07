@@ -33,11 +33,12 @@ public class Leitor
     }
 
     public static List<Leitor> leitores = new List<Leitor>();
+    // Criando uma nova lista chamada "leitores" para armazenar os leitores
 
     public void CriarLeitor(string nome, int idade, int cpf)
     {
-        Leitor leitor = new Leitor(nome, idade, cpf);
-        leitores.Add(leitor);
+        Leitor leitor = new Leitor(nome, idade, cpf); // Criando um novo leitor
+        leitores.Add(leitor); // Adicionando o leitor na lista de leitores
     }
     // Aqui começamos a criar o leitor, que vai ser nosso usuário do programa
 }
