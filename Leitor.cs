@@ -41,5 +41,14 @@ public class Leitor
         leitores.Add(leitor); // Adicionando o leitor na lista de leitores
     }
     // Aqui começamos a criar o leitor, que vai ser nosso usuário do programa
+
+    public void ListarLeitores()
+    {
+        foreach (Leitor leitor in leitores) // Cada leitor na lista de leitores
+        {
+            Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+            // Mostrando o nome, idade e CPF do leitor
+        }
+    }
 }
 // Depois resolver
