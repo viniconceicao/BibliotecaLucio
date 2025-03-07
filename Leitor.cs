@@ -71,6 +71,7 @@ public class Leitor
         // Removendo o leitor da lista de leitores
     }
 
+    // Incluir os livros do leitor
     public void ListarLivrosLeitor(int cpf)
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
@@ -79,6 +80,32 @@ public class Leitor
         {
             Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
             // Mostrando o título, escritor e editora do livro
+        }
+    }
+
+    // Editar um livro específico do leitor
+    public void EditarLivroLeitor(int cpf, string tituloLivro)
+    {
+        Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
+        // Procurando o leitor na lista de leitores pelo CPF
+        Livro livro = leitor.LivrosLeitor.Find(livro => livro.Titulo == tituloLivro);
+        // Procurando o livro na lista de livros do leitor pelo título
+
+        if (livro != null)
+        {
+            Console.WriteLine("Digite o novo título do livro: ");
+            livro.Titulo = Console.ReadLine();
+            // Pedindo o novo título do livro
+            Console.WriteLine("Digite o novo escritor do livro: ");
+            livro.Escritor = Console.ReadLine();
+            // Pedindo o novo escritor do livro
+            Console.WriteLine("Digite a nova editora do livro: ");
+            livro.Editora = Console.ReadLine();
+            // Pedindo a nova editora do livro
+        }
+        else
+        {
+            Console.WriteLine("Livro não encontrado.");
         }
     }
 }
