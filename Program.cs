@@ -1,8 +1,49 @@
-﻿internal class Program
+﻿using Biblioteca;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, caraio!");
+        while (true)
+        {
+            Console.WriteLine("\n===== MENU =====");
+            Console.WriteLine("1 - Criar Leitor");
+            Console.WriteLine("2 - Listar Leitores");
+            Console.WriteLine("3 - Editar Leitor");
+            Console.WriteLine("4 - Excluir Leitor");
+            Console.WriteLine("5 - Listar Livros de um Leitor");
+            Console.WriteLine("6 - Adicionar Livro a um Leitor");
+            Console.WriteLine("7 - Remover Livro de um Leitor");
+            Console.WriteLine("8 - Doar Livro");
+            Console.WriteLine("9 - Pesquisar Livro por Leitor");
+            Console.WriteLine("0 - Sair");
+            Console.Write("Escolha uma opção: ");
+
+            string opcao = Console.ReadLine();
+
+            switch (opcao)
+            {
+                case "1":
+                    CriarLeitor();
+                    break;
+            }
+
+        }
+
+        static void CriarLeitor()
+        {
+            Console.Write("Digite o nome do leitor: ");
+            string nome = Console.ReadLine();
+            Console.Write("Digite a idade do leitor: ");
+            int idade = int.Parse(Console.ReadLine());
+            Console.Write("Digite o CPF do leitor: ");
+            int cpf = int.Parse(Console.ReadLine());
+
+            Leitor leitor = new Leitor(nome, idade, cpf);
+            Leitor.leitores.Add(leitor);
+
+            Console.WriteLine("Leitor cadastrado com sucesso!");
+        }
     }
 }
 
