@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\viniv\\.nuget\\packages\\": {}
+    "C:\\Users\\aliss\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
+      "projectUniqueName": "C:\\Users\\aliss\\OneDrive\\Cofre Pessoal\\Anexos\\Imagens\\Imagens da Câmera\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
       "projectName": "Biblioteca",
-      "projectPath": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
-      "packagesPath": "C:\\Users\\viniv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\viniv\\OneDrive\\Documentos\\GitHub\\BibliotecaLucio\\obj\\",
+      "projectPath": "C:\\Users\\aliss\\OneDrive\\Cofre Pessoal\\Anexos\\Imagens\\Imagens da Câmera\\Documentos\\GitHub\\BibliotecaLucio\\Biblioteca.csproj",
+      "packagesPath": "C:\\Users\\aliss\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aliss\\OneDrive\\Cofre Pessoal\\Anexos\\Imagens\\Imagens da Câmera\\Documentos\\GitHub\\BibliotecaLucio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\viniv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\aliss\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"

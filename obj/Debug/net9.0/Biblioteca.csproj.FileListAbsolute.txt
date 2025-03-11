@@ -13,3 +13,18 @@ C:\Users\viniv\OneDrive\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\refin
 C:\Users\viniv\OneDrive\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.pdb
 C:\Users\viniv\OneDrive\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.genruntimeconfig.cache
 C:\Users\viniv\OneDrive\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\ref\Biblioteca.dll
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\bin\Debug\net9.0\Biblioteca.exe
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\bin\Debug\net9.0\Biblioteca.deps.json
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\bin\Debug\net9.0\Biblioteca.runtimeconfig.json
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\bin\Debug\net9.0\Biblioteca.dll
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\bin\Debug\net9.0\Biblioteca.pdb
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.AssemblyInfoInputs.cache
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.AssemblyInfo.cs
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.sourcelink.json
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.dll
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\refint\Biblioteca.dll
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.pdb
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\Biblioteca.genruntimeconfig.cache
+C:\Users\aliss\OneDrive\Cofre Pessoal\Anexos\Imagens\Imagens da Câmera\Documentos\GitHub\BibliotecaLucio\obj\Debug\net9.0\ref\Biblioteca.dll
