@@ -81,7 +81,7 @@ foreach (Livro livro in leitor.LivrosLeitor)
     Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
     // Mostrando o título, escritor e editora do livro
 }
-gi    }
+    }
 
     // Editar um livro específico do leitor
     public void EditarLivroLeitor(int cpf, string tituloLivro)
