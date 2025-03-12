@@ -76,33 +76,12 @@ public class Leitor
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
-        foreach (Livro livro in leitor.LivrosLeitor)
-
-            List<string> cpfsUsados = new List<string>();
-        
-            Console.Write("Digite o CPF do leitor: ");
-            if (!int.TryParse(Console.ReadLine(), out int cpf));
-
-                Leitor leitor = leitores.Find(1 =>,CPF == cpf);
-    {
-            Console.WriteLine("CPF inválido!");
-            return;
-    }
-
-            if (leitores.Exists(l => l.CPF == cpf))
-    {
-            Console.WriteLine("Erro: Este CPF já está em uso.");
-            return;
-    }
-
-Leitor novoLeitor = new Leitor(nome, idade, cpf);
-leitores.Add(novoLeitor);
-Console.WriteLine("Leitor cadastrado com sucesso!");
-        {
-            Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
-            // Mostrando o título, escritor e editora do livro
-        }
-    }
+foreach (Livro livro in leitor.LivrosLeitor)
+{
+    Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+    // Mostrando o título, escritor e editora do livro
+}
+gi    }
 
     // Editar um livro específico do leitor
     public void EditarLivroLeitor(int cpf, string tituloLivro)
