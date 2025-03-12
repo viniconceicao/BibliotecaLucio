@@ -66,8 +66,7 @@ internal class Program
 // O usuário deve poder cadastrar quantos leitores ou livros ele desejar
 
 /* Alunos:
-    - Alisson Rafael da Cruz Velho (testando, testando, testando
-)
+    - Alisson Rafael da Cruz Velho
     - Marcos Vinicius Arruda Vandresen
     - Rodrigo Vaisam Bastos
     - Vinicius de Liz da Conceição
