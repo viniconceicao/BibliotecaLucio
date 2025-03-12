@@ -81,7 +81,9 @@ public class Leitor
             List<string> cpfsUsados = new List<string>();
         
             Console.Write("Digite o CPF do leitor: ");
-            if (!int.TryParse(Console.ReadLine(), out int cpf))
+            if (!int.TryParse(Console.ReadLine(), out int cpf));
+
+                Leitor leitor = leitores.Find(1 =>,CPF == cpf);
     {
             Console.WriteLine("CPF inválido!");
             return;
