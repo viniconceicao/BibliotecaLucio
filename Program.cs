@@ -10,6 +10,7 @@ internal class Program
             Console.WriteLine("1 - Criar Leitor");
             Console.WriteLine("2 - Listar Leitores");
             Console.WriteLine("3 - Editar Leitor");
+            Console.WriteLine("4 - Excluir Leitor");
             Console.WriteLine("0 - Sair");
             Console.Write("Escolha uma opção: ");
 
@@ -26,6 +27,9 @@ internal class Program
                 case "3":
                     EditarLeitor();
                     break;
+                case "4":
+                    ExcluirLeitor();
+                    break;  
                 case "0":
                     return;
                 default:
@@ -98,6 +102,21 @@ internal class Program
         else
         {
             Console.WriteLine("Erro ao editar leitor.");
+        }
+    }
+
+    static void ExcluirLeitor()
+    {
+        Console.Write("Digite o CPF do leitor que deseja excluir: ");
+        string cpf = Console.ReadLine();
+
+        if (Leitor.ExcluirLeitor(cpf))
+        {
+            Console.WriteLine("Leitor excluído com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Erro: Leitor não encontrado.");
         }
     }
 }
