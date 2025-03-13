@@ -5,16 +5,15 @@ public class Leitor
     public string Nome;
     public int Idade;
     
-    public int CPF;
+    public string CPF; // Alterado para string, pois ele não funcionava, seja com ou sem pontos e traços
 
     public List<Livro> LivrosLeitor = new List<Livro>();
 
-    public Leitor(string nome, int idade, int cpf)
+    public Leitor(string nome, int idade, string cpf) // Alterado para string
     {
         Nome = nome;
         Idade = idade;
         CPF = cpf;
-
     }
 
     public void AdicionarLivro(Livro livro)
@@ -35,10 +34,17 @@ public class Leitor
     public static List<Leitor> leitores = new List<Leitor>();
     // Criando uma nova lista chamada "leitores" para armazenar os leitores
 
-    public void CriarLeitor(string nome, int idade, int cpf)
+    public void CriarLeitor(string nome, int idade, string cpf) // Alterado para string
     {
-        Leitor leitor = new Leitor(nome, idade, cpf); // Criando um novo leitor
-        leitores.Add(leitor); // Adicionando o leitor na lista de leitores
+        if (leitores.Exists(l => l.CPF == cpf))
+        {
+            Console.WriteLine("Erro: Este CPF já está em uso.");
+            return;
+        }
+
+        Leitor novoLeitor = new Leitor(nome, idade, cpf);
+        leitores.Add(novoLeitor);
+        Console.WriteLine("Leitor cadastrado com sucesso!");
     }
     // Aqui começamos a criar o leitor, que vai ser nosso usuário do programa
 
@@ -51,7 +57,7 @@ public class Leitor
         }
     }
 
-    public void EditarLeitor(int cpf)
+    public void EditarLeitor(string cpf) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
@@ -63,7 +69,7 @@ public class Leitor
         // Pedindo a nova idade do leitor
     }
 
-    public void ExcluirLeitor(int cpf)
+    public void ExcluirLeitor(string cpf) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
@@ -72,19 +78,26 @@ public class Leitor
     }
 
     // Incluir os livros do leitor
-    public void ListarLivrosLeitor(int cpf)
+    public void ListarLivrosLeitor(string cpf) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
-foreach (Livro livro in leitor.LivrosLeitor)
-{
-    Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
-    // Mostrando o título, escritor e editora do livro
-}
+        if (leitor != null)
+        {
+            foreach (Livro livro in leitor.LivrosLeitor)
+            {
+                Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}, Editora: {livro.Editora}");
+                // Mostrando o título, escritor e editora do livro
+            }
+        }
+        else
+        {
+            Console.WriteLine("Leitor não encontrado.");
+        }
     }
 
     // Editar um livro específico do leitor
-    public void EditarLivroLeitor(int cpf, string tituloLivro)
+    public void EditarLivroLeitor(string cpf, string tituloLivro) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
@@ -110,7 +123,7 @@ foreach (Livro livro in leitor.LivrosLeitor)
     }
 
     // Remover um livro, por exemplo, que foi perdido
-    public void RemoverLivroLeitor(int cpf, string tituloLivro)
+    public void RemoverLivroLeitor(string cpf, string tituloLivro) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
@@ -129,7 +142,7 @@ foreach (Livro livro in leitor.LivrosLeitor)
     }
 
     // Doar um livro para outro leitor
-    public void DoarLivroLeitor(int cpfDoacao, int cpfDestino, string tituloLivro)
+    public void DoarLivroLeitor(string cpfDoacao, string cpfDestino, string tituloLivro) // Alterado para string
     {
         Leitor leitorDoacao = leitores.Find(leitor => leitor.CPF == cpfDoacao);
         // Procurando o leitor que vai doar o livro na lista de leitores pelo CPF
@@ -167,7 +180,7 @@ foreach (Livro livro in leitor.LivrosLeitor)
     }
 
     // Listar um leitor específico e seus respectivos livros
-    public void ListarLeitorLivros(int cpf)
+    public void ListarLeitorLivros(string cpf) // Alterado para string
     {
         Leitor leitor = leitores.Find(leitor => leitor.CPF == cpf);
         // Procurando o leitor na lista de leitores pelo CPF
