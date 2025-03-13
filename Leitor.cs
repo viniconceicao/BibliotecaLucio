@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Biblioteca
 {
     public class Leitor
@@ -7,6 +11,8 @@ namespace Biblioteca
         public string CPF { get; set; }
         public List<Livro> LivrosLeitor { get; set; } = new List<Livro>();
 
+        public static List<Leitor> leitores = new List<Leitor>();
+
         public Leitor(string nome, int idade, string cpf)
         {
             Nome = nome;
@@ -14,33 +20,14 @@ namespace Biblioteca
             CPF = cpf;
         }
 
-        public void AdicionarLivro(Livro livro)
-        {
-            LivrosLeitor.Add(livro);
-        }
-
-        public void RemoverLivro(Livro livro)
-        {
-            LivrosLeitor.Remove(livro);
-        }
-
-        public void DoarLivro(Livro livroDoado, Leitor leitorDestino)
-        {
-            leitorDestino.LivrosLeitor.Add(livroDoado);
-            LivrosLeitor.Remove(livroDoado);
-        }
-
-        public static List<Leitor> leitores = new List<Leitor>();
-
         public static bool CriarLeitor(string nome, int idade, string cpf)
         {
-            if (leitores.Exists(l => l.CPF == cpf))
+            if (leitores.Any(l => l.CPF == cpf))
             {
                 return false;
             }
 
-            var novoLeitor = new Leitor(nome, idade, cpf);
-            leitores.Add(novoLeitor);
+            leitores.Add(new Leitor(nome, idade, cpf));
             return true;
         }
 
@@ -58,73 +45,43 @@ namespace Biblioteca
 
         public static bool ExcluirLeitor(string cpf)
         {
-            Leitor leitor = leitores.Find(l => l.CPF == cpf);
-            if (leitor != null)
+            var leitor = leitores.Find(l => l.CPF == cpf);
+            if (leitor == null)
             {
-                leitores.Remove(leitor);
-                return true;
+                return false;
             }
-            return false;
+
+            leitores.Remove(leitor);
+            return true;
         }
 
-        public List<Livro> ListarLivrosLeitor()
+        public void AdicionarLivro(Livro livro)
         {
-            return LivrosLeitor;
+            LivrosLeitor.Add(livro);
         }
 
-        public bool EditarLivroLeitor(string tituloLivro, string novoTitulo, string novoEscritor, string novaEditora)
+        public bool RemoverLivro(Livro livro)
         {
-            Livro livro = LivrosLeitor.Find(l => l.Titulo == tituloLivro);
-            if (livro != null)
+            return LivrosLeitor.Remove(livro);
+        }
+
+        public bool DoarLivroLeitor(string cpfDestino, string titulo)
+        {
+            var leitorDestino = leitores.Find(l => l.CPF == cpfDestino);
+            if (leitorDestino == null)
             {
-                livro.Titulo = novoTitulo;
-                livro.Escritor = novoEscritor;
-                livro.Editora = novaEditora;
-                return true;
+                return false;
             }
-            return false;
-        }
 
-        public bool RemoverLivroLeitor(string tituloLivro)
-        {
-            Livro livro = LivrosLeitor.Find(l => l.Titulo == tituloLivro);
-            if (livro != null)
+            var livro = LivrosLeitor.Find(l => l.Titulo == titulo);
+            if (livro == null)
             {
-                LivrosLeitor.Remove(livro);
-                return true;
+                return false;
             }
-            return false;
-        }
 
-        public bool DoarLivroLeitor(string cpfDestino, string tituloLivro)
-        {
-            Leitor leitorDestino = leitores.Find(l => l.CPF == cpfDestino);
-            Livro livro = LivrosLeitor.Find(l => l.Titulo == tituloLivro);
-            if (leitorDestino != null && livro != null)
-            {
-                leitorDestino.LivrosLeitor.Add(livro);
-                LivrosLeitor.Remove(livro);
-                return true;
-            }
-            return false;
-        }
-
-        public static Leitor ListarLeitorLivros(string cpf)
-        {
-            return leitores.Find(l => l.CPF == cpf);
-        }
-
-        public static Leitor PesquisarLivroLeitor(string tituloLivro)
-        {
-            foreach (Leitor leitor in leitores)
-            {
-                Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == tituloLivro);
-                if (livro != null)
-                {
-                    return leitor;
-                }
-            }
-            return null;
+            LivrosLeitor.Remove(livro);
+            leitorDestino.AdicionarLivro(livro);
+            return true;
         }
     }
 }
