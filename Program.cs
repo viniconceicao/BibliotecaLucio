@@ -72,3 +72,13 @@ internal class Program
         }
     }
 }
+
+/* 
+• Incluir os livros do leitor
+• Editar um livro especifico do leitor
+• Remover um livro, por exemplo, que foi perdido
+• Doar um livro para outro leitor
+• Listar todos os leitores e seus respectivos livros
+• Listar um leitor especifico e seus respectivos livros
+• Pesquisar por um livro especifico, e mostrar os dados do leitor
+ */
