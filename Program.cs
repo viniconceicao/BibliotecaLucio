@@ -438,6 +438,5 @@
      - Alisson Rafael da Cruz Velho
      - Marcos Vinicius Arruda Vandresen
      - Rodrigo Vaisam Bastos
-   
      - Vinicius de Liz da Conceição
  */
