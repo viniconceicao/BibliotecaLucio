@@ -228,7 +228,7 @@ internal class Program
 
         Console.Write("Digite o título do livro que deseja remover: ");
         string titulo = Console.ReadLine();
-        if (leitor.RemoverLivro(titulo))
+        if (leitor.RemoverLivro(titulo)) // RESOLVER ISSO
         {
             Console.WriteLine("Livro removido com sucesso!");
         }
@@ -245,7 +245,7 @@ internal class Program
 
 • Incluir os livros do leitor ✓
 • Editar um livro especifico do leitor ✓
-• Remover um livro, por exemplo, que foi perdido
+• Remover um livro, por exemplo, que foi perdido - FAZENDO
 • Doar um livro para outro leitor
 • Listar todos os leitores e seus respectivos livros
 • Listar um leitor especifico e seus respectivos livros
