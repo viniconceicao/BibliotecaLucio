@@ -26,6 +26,9 @@ internal class Program
                 case "1":
                     CriarLeitor();
                     break;
+                case "2":
+                    ListarLeitores();
+                    break;
             }
 
         }
@@ -43,6 +46,13 @@ internal class Program
             Leitor.leitores.Add(leitor);
 
             Console.WriteLine("Leitor cadastrado com sucesso!");
+        }
+        static void ListarLeitores()
+        {
+            foreach (Leitor leitor in Leitor.leitores)
+            {
+                Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+            }
         }
     }
 }
