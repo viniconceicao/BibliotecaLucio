@@ -9,6 +9,7 @@ internal class Program
             Console.WriteLine("\n===== MENU =====");
             Console.WriteLine("1 - Criar Leitor");
             Console.WriteLine("2 - Listar Leitores");
+            Console.WriteLine("3 - Editar Leitor");
             Console.WriteLine("0 - Sair");
             Console.Write("Escolha uma opção: ");
 
