@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Biblioteca
+﻿namespace Biblioteca
 {
     internal class Program
     {
@@ -14,7 +11,7 @@ namespace Biblioteca
                 Console.WriteLine("\nEscolha uma opção:\n");
                 // CRUD do Leitor
                 Console.WriteLine("1. Cadastrar Leitor");
-                Console.WriteLine("2. Listar Leitores"); // Listar todos os leitores e seus respectivos livros
+                Console.WriteLine("2. Listar Leitores");
                 Console.WriteLine("3. Editar Leitor");
                 Console.WriteLine("4. Excluir Leitor");
                 // CRUD do Livro
@@ -29,7 +26,7 @@ namespace Biblioteca
 
                 Console.WriteLine("0. Sair");
 
-                var opcao = Console.ReadLine();
+                var opcao = Console.ReadLine(); // Lê a opção escolhida pelo usuário
 
                 // Executa a ação correspondente à opção escolhida
                 switch (opcao)
@@ -90,7 +87,7 @@ namespace Biblioteca
             Console.Write("Digite o CPF do leitor (11 dígitos): ");
             string cpf = Console.ReadLine();
 
-            if (cpf.Length != 11 || !cpf.All(char.IsDigit))
+            if (cpf.Length != 11 || !cpf.All(char.IsDigit)) // Verifica se o CPF é válido
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
@@ -98,25 +95,25 @@ namespace Biblioteca
                 return;
             }
 
-            if (Leitor.CriarLeitor(nome, idade, cpf))
+            if (Leitor.CriarLeitor(nome, idade, cpf)) // Cria o leitor
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Leitor cadastrado com sucesso!");
             }
-            else
+            else 
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Erro: Este CPF já está em uso.");
+                Console.WriteLine("Erro: Este CPF já está em uso."); // Mensagem de erro caso o CPF já esteja em uso
             }
             Console.ResetColor();
         }
 
         // Método para listar todos os leitores e seus respectivos livros
-        static void ListarLeitores()
+        static void ListarLeitores() // 
         {
             Console.Clear();
-            var leitores = Leitor.ListarLeitores();
-            if (leitores.Count == 0)
+            var leitores = Leitor.ListarLeitores(); // Lista todos os leitores
+            if (leitores.Count == 0) // Verificando se existe leitores cadastrados
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Nenhum leitor cadastrado!");
@@ -125,11 +122,11 @@ namespace Biblioteca
             }
 
             Console.WriteLine("\nLista de Leitores:");
-            foreach (var leitor in leitores)
+            foreach (var leitor in leitores) // Exibe os dados de cada leitor
             {
                 Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
                 Console.WriteLine("Livros:");
-                foreach (var livro in leitor.LivrosLeitor)
+                foreach (var livro in leitor.LivrosLeitor) // Exibe os livros de cada leitor
                 {
                     Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
                 }
@@ -143,7 +140,7 @@ namespace Biblioteca
             Console.Write("Digite o CPF do leitor que deseja listar: ");
             string cpf = Console.ReadLine();
             Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -153,7 +150,7 @@ namespace Biblioteca
 
             Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
             Console.WriteLine("Livros:");
-            foreach (var livro in leitor.LivrosLeitor)
+            foreach (var livro in leitor.LivrosLeitor) // Exibe os livros do leitor
             {
                 Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
             }
@@ -165,9 +162,9 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o título do livro que deseja pesquisar: ");
             string titulo = Console.ReadLine();
-            foreach (var leitor in Leitor.leitores)
+            foreach (var leitor in Leitor.leitores) // Procura o livro em todos os leitores
             {
-                var livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
+                var livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo); // Procura o livro no leitor
                 if (livro != null)
                 {
                     Console.WriteLine($"Livro encontrado!");
@@ -188,8 +185,8 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o CPF do leitor que deseja editar: ");
             string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -202,12 +199,12 @@ namespace Biblioteca
             Console.Write("Digite a nova idade do leitor: ");
             int novaIdade = int.Parse(Console.ReadLine());
 
-            if (leitor.EditarLeitor(novoNome, novaIdade))
+            if (leitor.EditarLeitor(novoNome, novaIdade)) // Edita o leitor
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Leitor editado com sucesso!");
             }
-            else
+            else // Mensagem de erro caso o CPF já esteja em uso
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Erro ao editar leitor.");
@@ -222,12 +219,12 @@ namespace Biblioteca
             Console.Write("Digite o CPF do leitor que deseja excluir: ");
             string cpf = Console.ReadLine();
 
-            if (Leitor.ExcluirLeitor(cpf))
+            if (Leitor.ExcluirLeitor(cpf)) // Exclui o leitor
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Leitor excluído com sucesso!");
             }
-            else
+            else // Mensagem de erro caso o leitor não seja encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Erro: Leitor não encontrado.");
@@ -241,8 +238,8 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o CPF do leitor que deseja adicionar um livro: ");
             string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -253,7 +250,7 @@ namespace Biblioteca
             Console.Write("Digite o título do livro: ");
             string titulo = Console.ReadLine();
             Console.Write("Digite o subtitulo do livro: ");
-            string subTitulo = Console.ReadLine();
+            string subTitulo = Console.ReadLine(); 
             Console.Write("Digite o escritor do livro: ");
             string escritor = Console.ReadLine();
             Console.Write("Digite a editora do livro: ");
@@ -267,8 +264,8 @@ namespace Biblioteca
             Console.Write("Digite o número de páginas do livro: ");
             int numeroDePaginas = int.Parse(Console.ReadLine());
 
-            Livro livro = new Livro(titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas);
-            leitor.AdicionarLivro(livro);
+            Livro livro = new Livro(titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas); // Cria um novo livro
+            leitor.AdicionarLivro(livro); // Adiciona o livro ao leitor
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Livro adicionado com sucesso!");
             Console.ResetColor();
@@ -280,8 +277,8 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o CPF do leitor que deseja editar um livro: ");
             string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -292,7 +289,7 @@ namespace Biblioteca
             Console.Write("Digite o título do livro que deseja editar: ");
             string titulo = Console.ReadLine();
             Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
-            if (livro == null)
+            if (livro == null) // Verifica se o livro foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Livro não encontrado!");
@@ -317,6 +314,7 @@ namespace Biblioteca
             Console.Write("Digite o novo número de páginas do livro: ");
             int novoNumeroDePaginas = int.Parse(Console.ReadLine());
 
+            // Edita o livro recebendo os novos dados com váriavel recebendo o novo valor
             livro.Titulo = novoTitulo;
             livro.SubTitulo = novoSubTitulo;
             livro.Escritor = novoEscritor;
@@ -337,8 +335,8 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o CPF do leitor que deseja remover um livro: ");
             string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -348,8 +346,8 @@ namespace Biblioteca
 
             Console.Write("Digite o título do livro que deseja remover: ");
             string titulo = Console.ReadLine();
-            Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
-            if (livro == null)
+            Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo); // Procura o livro no leitor
+            if (livro == null) // Verifica se o livro foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Livro não encontrado!");
@@ -357,12 +355,12 @@ namespace Biblioteca
                 return;
             }
 
-            if (leitor.RemoverLivro(livro))
+            if (leitor.RemoverLivro(livro)) // Remove o livro do leitor
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Livro removido com sucesso!");
             }
-            else
+            else // Mensagem de erro caso o livro não seja encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Livro não encontrado!");
@@ -376,8 +374,8 @@ namespace Biblioteca
             Console.Clear();
             Console.Write("Digite o CPF do leitor que deseja doar um livro: ");
             string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null)
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
@@ -387,8 +385,8 @@ namespace Biblioteca
 
             Console.Write("Digite o CPF do leitor que receberá o livro: ");
             string cpfDestino = Console.ReadLine();
-            Leitor leitorDestino = Leitor.leitores.Find(l => l.CPF == cpfDestino);
-            if (leitorDestino == null)
+            Leitor leitorDestino = Leitor.leitores.Find(l => l.CPF == cpfDestino); // Procura o leitor destino pelo CPF
+            if (leitorDestino == null) // Verifica se o leitor destino foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor destino não encontrado!");
@@ -399,7 +397,7 @@ namespace Biblioteca
             Console.Write("Digite o título do livro que deseja doar: ");
             string titulo = Console.ReadLine();
             Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
-            if (livro == null)
+            if (livro == null) // Verifica se o livro foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Livro não encontrado!");
@@ -407,12 +405,12 @@ namespace Biblioteca
                 return;
             }
 
-            if (leitor.DoarLivroLeitor(cpfDestino, titulo))
+            if (leitor.DoarLivroLeitor(cpfDestino, titulo)) // Doa o livro
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Livro doado com sucesso!");
             }
-            else
+            else // Mensagem de erro caso o livro não seja encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Erro ao doar livro.");
