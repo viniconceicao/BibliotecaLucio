@@ -13,6 +13,7 @@ internal class Program
             Console.WriteLine("4 - Excluir Leitor");
             Console.WriteLine("5 - Adicionar Livro");
             Console.WriteLine("6 - Editar Livro");
+            Console.WriteLine("7 - Remover Livro");
             Console.WriteLine("0 - Sair");
             Console.Write("Escolha uma opção: ");
 
@@ -37,6 +38,9 @@ internal class Program
                     break;
                 case "6":
                     EditarLivro();
+                    break;
+                case "7";
+                    RemoverLivro();
                     break;
                 case "0":
                     return;
@@ -162,7 +166,54 @@ internal class Program
         Console.WriteLine("Livro adicionado com sucesso!");
     }
 
-    // coment editar livro começar cu
+    static void EditarLivro()
+    {
+        Console.Write("Digite o CPF do leitor que deseja editar um livro: ");
+        string cpf = Console.ReadLine();
+        Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
+        if (leitor == null)
+        {
+            Console.WriteLine("Leitor não encontrado!");
+            return;
+        }
+
+        Console.Write("Digite o título do livro que deseja editar: ");
+        string titulo = Console.ReadLine();
+        Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
+        if (livro == null)
+        {
+            Console.WriteLine("Livro não encontrado!");
+            return;
+        }
+
+        Console.Write("Digite o novo título do livro: ");
+        string novoTitulo = Console.ReadLine();
+        Console.Write("Digite o novo subtitulo do livro: ");
+        string novoSubTitulo = Console.ReadLine();
+        Console.Write("Digite o novo escritor do livro: ");
+        string novoEscritor = Console.ReadLine();
+        Console.Write("Digite a nova editora do livro: ");
+        string novaEditora = Console.ReadLine();
+        Console.Write("Digite o novo gênero do livro: ");
+        string novoGenero = Console.ReadLine();
+        Console.Write("Digite o novo ano de publicação do livro: ");
+        int novoAnoPublicacao = int.Parse(Console.ReadLine());
+        Console.Write("Digite o novo tipo da capa do livro: ");
+        string novoTipoDaCapa = Console.ReadLine();
+        Console.Write("Digite o novo número de páginas do livro: ");
+        int novoNumeroDePaginas = int.Parse(Console.ReadLine());
+
+        livro.Titulo = novoTitulo;
+        livro.SubTitulo = novoSubTitulo;
+        livro.Escritor = novoEscritor;
+        livro.Editora = novaEditora;
+        livro.Genero = novoGenero;
+        livro.AnoPublicacao = novoAnoPublicacao;
+        livro.TipoDaCapa = novoTipoDaCapa;
+        livro.NumeroDePaginas = novoNumeroDePaginas;
+
+        Console.WriteLine("Livro editado com sucesso!");
+    }
 }
 
 /* 
@@ -170,10 +221,14 @@ internal class Program
   (o “✓" Indica que já foi feito)
 
 • Incluir os livros do leitor ✓
-• Editar um livro especifico do leitor
+• Editar um livro especifico do leitor ✓
 • Remover um livro, por exemplo, que foi perdido
 • Doar um livro para outro leitor
 • Listar todos os leitores e seus respectivos livros
 • Listar um leitor especifico e seus respectivos livros
 • Pesquisar por um livro especifico, e mostrar os dados do leitor
  */
+
+
+
+ // to começando a ficar com muito peso na consciência de dar tab no copilot...
