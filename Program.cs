@@ -39,7 +39,7 @@ internal class Program
                 case "6":
                     EditarLivro();
                     break;
-                case "7";
+                case "7":
                     RemoverLivro();
                     break;
                 case "0":
