@@ -37,11 +37,23 @@ internal class Program
         string nome = Console.ReadLine();
         Console.Write("Digite a idade do leitor: ");
         int idade = int.Parse(Console.ReadLine());
-        Console.Write("Digite o CPF do leitor: ");
+        Console.Write("Digite o CPF do leitor (11 dígitos): ");
         string cpf = Console.ReadLine();
 
-        Leitor.CriarLeitor(nome, idade, cpf);
-        Console.WriteLine("Leitor cadastrado com sucesso!");
+        if (cpf.Length != 11 || !cpf.All(char.IsDigit))
+        {
+            Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+            return;
+        }
+
+        if (Leitor.CriarLeitor(nome, idade, cpf))
+        {
+            Console.WriteLine("Leitor cadastrado com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Erro: Este CPF já está em uso.");
+        }
     }
 
     static void ListarLeitores()
