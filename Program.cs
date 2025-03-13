@@ -39,8 +39,9 @@ internal class Program
         int idade = int.Parse(Console.ReadLine());
         Console.Write("Digite o CPF do leitor: ");
         string cpf = Console.ReadLine();
-        
+
         Leitor.CriarLeitor(nome, idade, cpf);
+        Console.WriteLine("Leitor cadastrado com sucesso!");
     }
 
     static void ListarLeitores()

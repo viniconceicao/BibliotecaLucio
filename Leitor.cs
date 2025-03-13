@@ -41,7 +41,6 @@ namespace Biblioteca
 
             var novoLeitor = new Leitor(nome, idade, cpf);
             leitores.Add(novoLeitor);
-            Console.WriteLine("Leitor cadastrado com sucesso!");
             return true;
         }
 
