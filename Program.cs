@@ -214,6 +214,29 @@ internal class Program
 
         Console.WriteLine("Livro editado com sucesso!");
     }
+
+    static void RemoverLivro()
+    {
+        Console.Write("Digite o CPF do leitor que deseja remover um livro: ");
+        string cpf = Console.ReadLine();
+        Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
+        if (leitor == null)
+        {
+            Console.WriteLine("Leitor não encontrado!");
+            return;
+        }
+
+        Console.Write("Digite o título do livro que deseja remover: ");
+        string titulo = Console.ReadLine();
+        if (leitor.RemoverLivro(titulo))
+        {
+            Console.WriteLine("Livro removido com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Livro não encontrado!");
+        }
+    }
 }
 
 /* 
