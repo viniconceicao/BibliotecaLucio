@@ -16,15 +16,18 @@
                 Console.WriteLine("4. Excluir Leitor");
                 // CRUD do Livro
                 Console.WriteLine("\n-----------------------------\n");
-                Console.WriteLine("5. Adicionar Livro");
-                Console.WriteLine("6. Editar Livro");
-                Console.WriteLine("7. Remover Livro");
-                Console.WriteLine("8. Doar Livro");
+                Console.WriteLine("5. Adicionar Livro no Leitor");
+                Console.WriteLine("6. Editar Livro no Leitor");
+                Console.WriteLine("7. Remover Livro no Leitor");
+                Console.WriteLine("8. Doar Livro ");
                 Console.WriteLine("\n-----------------------------\n");
+                // Outras funcionalidades
                 Console.WriteLine("9. Listar um leitor específico e seus respectivos livros");
                 Console.WriteLine("10. Pesquisar por um livro específico e mostrar os dados do leitor\n");
-
+                Console.WriteLine("-----------------------------\n");
                 Console.WriteLine("0. Sair");
+                Console.WriteLine("\n-----------------------------\n");
+                Console.WriteLine("Escolha uma opção: ");
 
                 var opcao = Console.ReadLine(); // Lê a opção escolhida pelo usuário
 
@@ -76,6 +79,12 @@
             }
         }
 
+        // Função para validar CPF
+        static bool ValidarCPF(string cpf)
+        {
+            return cpf.Length == 11 && cpf.All(char.IsDigit);
+        }
+
         // Método para criar um novo leitor
         static void CriarLeitor()
         {
@@ -87,7 +96,7 @@
             Console.Write("Digite o CPF do leitor (11 dígitos): ");
             string cpf = Console.ReadLine();
 
-            if (cpf.Length != 11 || !cpf.All(char.IsDigit)) // Verifica se o CPF é válido
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
@@ -124,6 +133,7 @@
             Console.WriteLine("\nLista de Leitores:");
             foreach (var leitor in leitores) // Exibe os dados de cada leitor
             {
+                Console.WriteLine($"-----------------------------");
                 Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
                 Console.WriteLine("Livros:");
                 foreach (var livro in leitor.LivrosLeitor) // Exibe os livros de cada leitor
@@ -147,7 +157,7 @@
                 Console.ResetColor();
                 return;
             }
-
+            Console.WriteLine($"\n");
             Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
             Console.WriteLine("Livros:");
             foreach (var livro in leitor.LivrosLeitor) // Exibe os livros do leitor
@@ -167,9 +177,13 @@
                 var livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo); // Procura o livro no leitor
                 if (livro != null)
                 {
-                    Console.WriteLine($"Livro encontrado!");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\nLivro encontrado!");
+                    Console.ResetColor();
+                    Console.WriteLine($"-----------------------------");
                     Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}");
                     Console.WriteLine($"Leitor: {leitor.Nome}, CPF: {leitor.CPF}");
+                    Console.WriteLine($"-----------------------------");
                     return;
                 }
             }
