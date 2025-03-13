@@ -22,6 +22,9 @@ internal class Program
                 case "2":
                     ListarLeitores();
                     break;
+                case "3":
+                    EditarLeitor();
+                    break;
                 case "0":
                     return;
                 default:
@@ -69,6 +72,31 @@ internal class Program
         foreach (var leitor in leitores)
         {
             Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+        }
+    }
+
+    static void EditarLeitor() {
+        Console.Write("Digite o CPF do leitor que deseja editar: ");
+        string cpf = Console.ReadLine();
+        Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
+        if (leitor == null)
+        {
+            Console.WriteLine("Leitor não encontrado!");
+            return;
+        }
+
+        Console.Write("Digite o novo nome do leitor: ");
+        string novoNome = Console.ReadLine();
+        Console.Write("Digite a nova idade do leitor: ");
+        int novaIdade = int.Parse(Console.ReadLine());
+
+        if (leitor.EditarLeitor(novoNome, novaIdade))
+        {
+            Console.WriteLine("Leitor editado com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Erro ao editar leitor.");
         }
     }
 }
