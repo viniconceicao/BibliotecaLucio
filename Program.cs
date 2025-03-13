@@ -11,15 +11,23 @@ namespace Biblioteca
             {
                 Console.Clear();
                 // Exibe o menu de opções para o usuário
-                Console.WriteLine("\nEscolha uma opção:");
-                Console.WriteLine("1. Criar Leitor");
-                Console.WriteLine("2. Listar Leitores");
+                Console.WriteLine("\nEscolha uma opção:\n");
+                // CRUD do Leitor
+                Console.WriteLine("1. Cadastrar Leitor");
+                Console.WriteLine("2. Listar Leitores"); // Listar todos os leitores e seus respectivos livros
                 Console.WriteLine("3. Editar Leitor");
                 Console.WriteLine("4. Excluir Leitor");
+                // CRUD do Livro
+                Console.WriteLine("\n-----------------------------\n");
                 Console.WriteLine("5. Adicionar Livro");
                 Console.WriteLine("6. Editar Livro");
                 Console.WriteLine("7. Remover Livro");
                 Console.WriteLine("8. Doar Livro");
+                Console.WriteLine("\n-----------------------------\n");
+                // O que falta
+                Console.WriteLine("9. Listar um leitor específico e seus respectivos livros");
+                Console.WriteLine("10. Pesquisar por um livro específico e mostrar os dados do leitor\n");
+
                 Console.WriteLine("0. Sair");
 
                 var opcao = Console.ReadLine();
@@ -51,6 +59,12 @@ namespace Biblioteca
                     case "8":
                         DoarLivroLeitor();
                         break;
+                    case "9":
+                        ListarLeitorEspecifico();
+                        break;
+                    case "10":
+                        PesquisarLivro();
+                        break;
                     case "0":
                         return;
                     default:
@@ -59,8 +73,10 @@ namespace Biblioteca
                         Console.ResetColor();
                         break;
                 }
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Pressione qualquer tecla para continuar...");
                 Console.ReadKey();
+                Console.ResetColor();
             }
         }
 
@@ -96,7 +112,7 @@ namespace Biblioteca
             Console.ResetColor();
         }
 
-        // Método para listar todos os leitores
+        // Método para listar todos os leitores e seus respectivos livros
         static void ListarLeitores()
         {
             Console.Clear();
@@ -113,7 +129,58 @@ namespace Biblioteca
             foreach (var leitor in leitores)
             {
                 Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+                Console.WriteLine("Livros:");
+                foreach (var livro in leitor.LivrosLeitor)
+                {
+                    Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
+                }
             }
+        }
+
+        // Método para listar um leitor específico e seus respectivos livros
+        static void ListarLeitorEspecifico()
+        {
+            Console.Clear();
+            Console.Write("Digite o CPF do leitor que deseja listar: ");
+            string cpf = Console.ReadLine();
+            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
+            if (leitor == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Leitor não encontrado!");
+                Console.ResetColor();
+                return;
+            }
+
+            Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
+            Console.WriteLine("Livros:");
+            foreach (var livro in leitor.LivrosLeitor)
+            {
+                Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
+            }
+        }
+
+        // Método para pesquisar por um livro específico e mostrar os dados do leitor
+        static void PesquisarLivro()
+        {
+            Console.Clear();
+            Console.Write("Digite o título do livro que deseja pesquisar: ");
+            string titulo = Console.ReadLine();
+            foreach (var leitor in Leitor.leitores)
+            {
+                var livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
+                if (livro != null)
+                {
+                    Console.WriteLine($"Livro encontrado!");
+                    Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}");
+                    Console.WriteLine($"Leitor: {leitor.Nome}, CPF: {leitor.CPF}");
+                    return;
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Livro não encontrado!");
+            Console.ResetColor();
         }
 
         // Método para editar um leitor existente
