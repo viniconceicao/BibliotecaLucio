@@ -34,7 +34,7 @@ public class Leitor
     public static List<Leitor> leitores = new List<Leitor>();
     // Criando uma nova lista chamada "leitores" para armazenar os leitores
 
-    public void CriarLeitor(string nome, int idade, string cpf) // Alterado para string
+    public static void CriarLeitor(string nome, int idade, string cpf) // Alterado para string
     {
         if (leitores.Exists(l => l.CPF == cpf))
         {
@@ -42,19 +42,15 @@ public class Leitor
             return;
         }
 
-        Leitor novoLeitor = new Leitor(nome, idade, cpf);
+        var novoLeitor = new Leitor(nome, idade, cpf);
         leitores.Add(novoLeitor);
         Console.WriteLine("Leitor cadastrado com sucesso!");
     }
     // Aqui começamos a criar o leitor, que vai ser nosso usuário do programa
 
-    public void ListarLeitores()
+    public static List<Leitor> ListarLeitores()
     {
-        foreach (Leitor leitor in leitores) // Cada leitor na lista de leitores
-        {
-            Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
-            // Mostrando o nome, idade e CPF do leitor
-        }
+        return leitores;
     }
 
     public void EditarLeitor(string cpf) // Alterado para string
