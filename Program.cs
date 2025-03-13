@@ -29,6 +29,9 @@ internal class Program
                 case "2":
                     ListarLeitores();
                     break;
+                case "0":
+                    default:
+                    return;
             }
 
         }
@@ -47,6 +50,7 @@ internal class Program
 
             Console.WriteLine("Leitor cadastrado com sucesso!");
         }
+        
         static void ListarLeitores()
         {
             foreach (Leitor leitor in Leitor.leitores)

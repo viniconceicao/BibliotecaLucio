@@ -2,10 +2,10 @@ namespace Biblioteca;
 
 public class Leitor
 {
-    public string Nome;
-    public int Idade;
+    public string Nome { get; set; }
+    public int Idade { get; set; }
     
-    public string CPF; // Alterado para string, pois ele não funcionava, seja com ou sem pontos e traços
+    public string CPF { get; set; } // Alterado para string, pois ele não funcionava, seja com ou sem pontos e traços
 
     public List<Livro> LivrosLeitor = new List<Livro>();
 
