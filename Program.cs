@@ -11,6 +11,8 @@ internal class Program
             Console.WriteLine("2 - Listar Leitores");
             Console.WriteLine("3 - Editar Leitor");
             Console.WriteLine("4 - Excluir Leitor");
+            Console.WriteLine("5 - Adicionar Livro");
+            Console.WriteLine("6 - Editar Livro");
             Console.WriteLine("0 - Sair");
             Console.Write("Escolha uma opção: ");
 
@@ -30,6 +32,12 @@ internal class Program
                 case "4":
                     ExcluirLeitor();
                     break;  
+                case "5":
+                    AdicionarLivro();
+                    break;
+                case "6":
+                    EditarLivro();
+                    break;
                 case "0":
                     return;
                 default:
@@ -119,10 +127,49 @@ internal class Program
             Console.WriteLine("Erro: Leitor não encontrado.");
         }
     }
+
+    static void AdicionarLivro()
+    {
+        Console.Write("Digite o CPF do leitor que deseja adicionar um livro: ");
+        string cpf = Console.ReadLine();
+        Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
+        if (leitor == null)
+        {
+            Console.WriteLine("Leitor não encontrado!");
+            return;
+        }
+
+        // Ver se realmente precisa de todas essas informações do livro, subtítulo e pá (CONFERIR Livro.cs)
+        Console.Write("Digite o título do livro: ");
+        string titulo = Console.ReadLine();
+        Console.Write("Digite o subtitulo do livro: ");
+        string subTitulo = Console.ReadLine();
+        Console.Write("Digite o escritor do livro: ");
+        string escritor = Console.ReadLine();
+        Console.Write("Digite a editora do livro: ");
+        string editora = Console.ReadLine();
+        Console.Write("Digite o gênero do livro: ");
+        string genero = Console.ReadLine();
+        Console.Write("Digite o ano de publicação do livro: ");
+        int anoPublicacao = int.Parse(Console.ReadLine());
+        Console.Write("Digite o tipo da capa do livro: ");
+        string tipoDaCapa = Console.ReadLine();
+        Console.Write("Digite o número de páginas do livro: ");
+        int numeroDePaginas = int.Parse(Console.ReadLine());
+
+        Livro livro = new Livro(titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas);
+        leitor.AdicionarLivro(livro);
+        Console.WriteLine("Livro adicionado com sucesso!");
+    }
+
+    // coment editar livro começar cu
 }
 
 /* 
-• Incluir os livros do leitor
+
+  (o “✓" Indica que já foi feito)
+
+• Incluir os livros do leitor ✓
 • Editar um livro especifico do leitor
 • Remover um livro, por exemplo, que foi perdido
 • Doar um livro para outro leitor
