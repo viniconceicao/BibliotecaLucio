@@ -24,7 +24,6 @@ namespace Biblioteca
                 Console.WriteLine("7. Remover Livro");
                 Console.WriteLine("8. Doar Livro");
                 Console.WriteLine("\n-----------------------------\n");
-                // O que falta
                 Console.WriteLine("9. Listar um leitor específico e seus respectivos livros");
                 Console.WriteLine("10. Pesquisar por um livro específico e mostrar os dados do leitor\n");
 
