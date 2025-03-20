@@ -1,17 +1,17 @@
 namespace Biblioteca;
 
-public class Livro
+internal class Livro
 {
-    public string Titulo { get; set; }
-    public string SubTitulo { get; set; }
-    public string Escritor { get; set; }
-    public string Editora { get; set; }
-    public string Genero { get; set; }
-    public int AnoPublicacao { get; set; }
-    public string TipoDaCapa { get; set; }
-    public int NumeroDePaginas { get; set; }
+    internal string Titulo { get; set; }
+    internal string SubTitulo { get; set; }
+    internal string Escritor { get; set; }
+    internal string Editora { get; set; }
+    internal string Genero { get; set; }
+    internal int AnoPublicacao { get; set; }
+    internal string TipoDaCapa { get; set; }
+    internal int NumeroDePaginas { get; set; }
 
-    public Livro(string titulo, string subTitulo, string escritor, string editora, string genero, int anoPublicacao, string tipoDaCapa, int numeroDePaginas)
+    internal Livro(string titulo, string subTitulo, string escritor, string editora, string genero, int anoPublicacao, string tipoDaCapa, int numeroDePaginas)
     {
         Titulo = titulo;
         SubTitulo = subTitulo;
