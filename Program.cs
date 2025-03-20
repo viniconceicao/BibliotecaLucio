@@ -89,30 +89,39 @@
         static void CriarLeitor()
         {
             Console.Clear();
-            Console.Write("Digite o nome do leitor: ");
-            string nome = Console.ReadLine();
-            Console.Write("Digite a idade do leitor: ");
-            int idade = int.Parse(Console.ReadLine());
-            Console.Write("Digite o CPF do leitor (11 dígitos): ");
-            string cpf = Console.ReadLine();
+            Console.Write("Digite o nome do leitor ou '0' para sair: ");
+            string nome = Console.ReadLine().Trim();
+            if (nome == "0") return;
+
+            Console.Write("Digite a idade do leitor ou '0' para sair: ");
+            string idadeInput = Console.ReadLine().Trim();
+            if (idadeInput == "0") return;
+            int idade = int.Parse(idadeInput);
+
+            string cpf;
+            do
+            {
+            Console.Write("Digite o CPF do leitor (11 dígitos) ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
 
             if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
                 Console.ResetColor();
-                return;
             }
+            } while (!ValidarCPF(cpf));
 
             if (Leitor.CriarLeitor(nome, idade, cpf)) // Cria o leitor
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Leitor cadastrado com sucesso!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Leitor cadastrado com sucesso!");
             }
-            else 
+            else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Erro: Este CPF já está em uso."); // Mensagem de erro caso o CPF já esteja em uso
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Erro: Este CPF já está em uso."); // Mensagem de erro caso o CPF já esteja em uso
             }
             Console.ResetColor();
         }
@@ -147,22 +156,38 @@
         static void ListarLeitorEspecifico()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja listar: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf);
-            if (leitor == null) // Verifica se o leitor foi encontrado
+            string cpf;
+            Leitor leitor = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que deseja listar ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+                if (leitor == null) // Verifica se o leitor foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpf) || leitor == null);
+
             Console.WriteLine($"\n");
             Console.WriteLine($"Nome: {leitor.Nome}, Idade: {leitor.Idade}, CPF: {leitor.CPF}");
             Console.WriteLine("Livros:");
             foreach (var livro in leitor.LivrosLeitor) // Exibe os livros do leitor
             {
-                Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
+            Console.WriteLine($"  - {livro.Titulo} por {livro.Escritor}");
             }
         }
 
@@ -170,58 +195,82 @@
         static void PesquisarLivro()
         {
             Console.Clear();
-            Console.Write("Digite o título do livro que deseja pesquisar: ");
-            string titulo = Console.ReadLine();
+            string titulo;
+            bool livroEncontrado = false;
+            do
+            {
+            Console.Write("Digite o título do livro que deseja pesquisar ou '0' para sair: ");
+            titulo = Console.ReadLine().Trim();
+            if (titulo == "0") return;
+
             foreach (var leitor in Leitor.leitores) // Procura o livro em todos os leitores
             {
                 var livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo); // Procura o livro no leitor
                 if (livro != null)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\nLivro encontrado!");
-                    Console.ResetColor();
-                    Console.WriteLine($"-----------------------------");
-                    Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}");
-                    Console.WriteLine($"Leitor: {leitor.Nome}, CPF: {leitor.CPF}");
-                    Console.WriteLine($"-----------------------------");
-                    return;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nLivro encontrado!");
+                Console.ResetColor();
+                Console.WriteLine($"-----------------------------");
+                Console.WriteLine($"Título: {livro.Titulo}, Escritor: {livro.Escritor}");
+                Console.WriteLine($"Leitor: {leitor.Nome}, CPF: {leitor.CPF}");
+                Console.WriteLine($"-----------------------------");
+                livroEncontrado = true;
                 }
             }
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Livro não encontrado!");
-            Console.ResetColor();
+            if (!livroEncontrado)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Livro não encontrado! Por favor, insira um título válido.");
+                Console.ResetColor();
+            }
+            } while (!livroEncontrado);
         }
 
         // Método para editar um leitor existente
         static void EditarLeitor()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja editar: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+            Leitor leitor = null;
+            string cpf;
+            do
+            {
+            Console.Write("Digite o CPF do leitor que deseja editar ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
             if (leitor == null) // Verifica se o leitor foi encontrado
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Leitor não encontrado!");
+                Console.WriteLine("Leitor não encontrado! Digite um CPF que existe.");
                 Console.ResetColor();
-                return;
             }
+            } while (leitor == null);
 
-            Console.Write("Digite o novo nome do leitor: ");
-            string novoNome = Console.ReadLine();
-            Console.Write("Digite a nova idade do leitor: ");
-            int novaIdade = int.Parse(Console.ReadLine());
+            Console.Write("Digite o novo nome do leitor ou '0' para sair: ");
+            string novoNome = Console.ReadLine().Trim();
+            if (novoNome == "0") return;
+
+            string novaIdadeInput;
+            int novaIdade;
+            do
+            {
+            Console.Write("Digite a nova idade do leitor ou '0' para sair: ");
+            novaIdadeInput = Console.ReadLine().Trim();
+            if (novaIdadeInput == "0") return;
+            } while (!int.TryParse(novaIdadeInput, out novaIdade));
 
             if (leitor.EditarLeitor(novoNome, novaIdade)) // Edita o leitor
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Leitor editado com sucesso!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Leitor editado com sucesso!");
             }
             else // Mensagem de erro caso o CPF já esteja em uso
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Erro ao editar leitor.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Erro ao editar leitor.");
             }
             Console.ResetColor();
         }
@@ -229,19 +278,37 @@
         // Método para excluir um leitor
         static void ExcluirLeitor()
         {
+            string cpf;
+            do
+            {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja excluir: ");
-            string cpf = Console.ReadLine();
+            Console.Write("Digite o CPF do leitor que deseja excluir ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            } while (!ValidarCPF(cpf));
 
             if (Leitor.ExcluirLeitor(cpf)) // Exclui o leitor
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Leitor excluído com sucesso!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Leitor excluído com sucesso!");
             }
             else // Mensagem de erro caso o leitor não seja encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Erro: Leitor não encontrado.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Erro: Leitor não encontrado. Por favor, insira um CPF cadastrado.");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Pressione qualquer tecla para tentar novamente...");
+            Console.ReadKey();
+            Console.ResetColor();
+            ExcluirLeitor(); // Chama o método novamente para tentar excluir outro leitor
             }
             Console.ResetColor();
         }
@@ -250,33 +317,48 @@
         static void AdicionarLivro()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja adicionar um livro: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
-            if (leitor == null) // Verifica se o leitor foi encontrado
+            string cpf;
+            Leitor leitor = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que deseja adicionar um livro ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+                if (leitor == null) // Verifica se o leitor foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpf) || leitor == null);
 
             Console.Write("Digite o título do livro: ");
-            string titulo = Console.ReadLine();
+            string titulo = Console.ReadLine().Trim();
             Console.Write("Digite o subtitulo do livro: ");
-            string subTitulo = Console.ReadLine(); 
+            string subTitulo = Console.ReadLine().Trim();
             Console.Write("Digite o escritor do livro: ");
-            string escritor = Console.ReadLine();
+            string escritor = Console.ReadLine().Trim();
             Console.Write("Digite a editora do livro: ");
-            string editora = Console.ReadLine();
+            string editora = Console.ReadLine().Trim();
             Console.Write("Digite o gênero do livro: ");
-            string genero = Console.ReadLine();
+            string genero = Console.ReadLine().Trim();
             Console.Write("Digite o ano de publicação do livro: ");
-            int anoPublicacao = int.Parse(Console.ReadLine());
+            int anoPublicacao = int.Parse(Console.ReadLine().Trim());
             Console.Write("Digite o tipo da capa do livro: ");
-            string tipoDaCapa = Console.ReadLine();
+            string tipoDaCapa = Console.ReadLine().Trim();
             Console.Write("Digite o número de páginas do livro: ");
-            int numeroDePaginas = int.Parse(Console.ReadLine());
+            int numeroDePaginas = int.Parse(Console.ReadLine().Trim());
 
             Livro livro = new Livro(titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas); // Cria um novo livro
             leitor.AdicionarLivro(livro); // Adiciona o livro ao leitor
@@ -289,44 +371,59 @@
         static void EditarLivro()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja editar um livro: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
-            if (leitor == null) // Verifica se o leitor foi encontrado
+            string cpf;
+            Leitor leitor = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que deseja editar um livro ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+                if (leitor == null) // Verifica se o leitor foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpf) || leitor == null);
 
             Console.Write("Digite o título do livro que deseja editar: ");
-            string titulo = Console.ReadLine();
+            string titulo = Console.ReadLine().Trim();
             Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
             if (livro == null) // Verifica se o livro foi encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Livro não encontrado!");
-                Console.ResetColor();
-                return;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Livro não encontrado!");
+            Console.ResetColor();
+            return;
             }
 
             Console.Write("Digite o novo título do livro: ");
-            string novoTitulo = Console.ReadLine();
+            string novoTitulo = Console.ReadLine().Trim();
             Console.Write("Digite o novo subtitulo do livro: ");
-            string novoSubTitulo = Console.ReadLine();
+            string novoSubTitulo = Console.ReadLine().Trim();
             Console.Write("Digite o novo escritor do livro: ");
-            string novoEscritor = Console.ReadLine();
+            string novoEscritor = Console.ReadLine().Trim();
             Console.Write("Digite a nova editora do livro: ");
-            string novaEditora = Console.ReadLine();
+            string novaEditora = Console.ReadLine().Trim();
             Console.Write("Digite o novo gênero do livro: ");
-            string novoGenero = Console.ReadLine();
+            string novoGenero = Console.ReadLine().Trim();
             Console.Write("Digite o novo ano de publicação do livro: ");
-            int novoAnoPublicacao = int.Parse(Console.ReadLine());
+            int novoAnoPublicacao = int.Parse(Console.ReadLine().Trim());
             Console.Write("Digite o novo tipo da capa do livro: ");
-            string novoTipoDaCapa = Console.ReadLine();
+            string novoTipoDaCapa = Console.ReadLine().Trim();
             Console.Write("Digite o novo número de páginas do livro: ");
-            int novoNumeroDePaginas = int.Parse(Console.ReadLine());
+            int novoNumeroDePaginas = int.Parse(Console.ReadLine().Trim());
 
             // Edita o livro recebendo os novos dados com váriavel recebendo o novo valor
             livro.Titulo = novoTitulo;
@@ -347,37 +444,52 @@
         static void RemoverLivroLeitor()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja remover um livro: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
-            if (leitor == null) // Verifica se o leitor foi encontrado
+            string cpf;
+            Leitor leitor = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que deseja remover um livro ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+                if (leitor == null) // Verifica se o leitor foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpf) || leitor == null);
 
             Console.Write("Digite o título do livro que deseja remover: ");
-            string titulo = Console.ReadLine();
+            string titulo = Console.ReadLine().Trim();
             Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo); // Procura o livro no leitor
             if (livro == null) // Verifica se o livro foi encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Livro não encontrado!");
-                Console.ResetColor();
-                return;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Livro não encontrado!");
+            Console.ResetColor();
+            return;
             }
 
             if (leitor.RemoverLivro(livro)) // Remove o livro do leitor
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Livro removido com sucesso!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Livro removido com sucesso!");
             }
             else // Mensagem de erro caso o livro não seja encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Livro não encontrado!");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Erro ao remover livro.");
             }
             Console.ResetColor();
         }
@@ -386,48 +498,78 @@
         static void DoarLivroLeitor()
         {
             Console.Clear();
-            Console.Write("Digite o CPF do leitor que deseja doar um livro: ");
-            string cpf = Console.ReadLine();
-            Leitor leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
-            if (leitor == null) // Verifica se o leitor foi encontrado
+            string cpf;
+            Leitor leitor = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que deseja doar um livro ou '0' para sair: ");
+            cpf = Console.ReadLine().Trim();
+            if (cpf == "0") return;
+
+            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitor = Leitor.leitores.Find(l => l.CPF == cpf); // Procura o leitor pelo CPF
+                if (leitor == null) // Verifica se o leitor foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpf) || leitor == null);
 
-            Console.Write("Digite o CPF do leitor que receberá o livro: ");
-            string cpfDestino = Console.ReadLine();
-            Leitor leitorDestino = Leitor.leitores.Find(l => l.CPF == cpfDestino); // Procura o leitor destino pelo CPF
-            if (leitorDestino == null) // Verifica se o leitor destino foi encontrado
+            string cpfDestino;
+            Leitor leitorDestino = null;
+            do
             {
+            Console.Write("Digite o CPF do leitor que receberá o livro ou '0' para sair: ");
+            cpfDestino = Console.ReadLine().Trim();
+            if (cpfDestino == "0") return;
+
+            if (!ValidarCPF(cpfDestino)) // Verifica se o CPF é válido
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
+                Console.ResetColor();
+            }
+            else
+            {
+                leitorDestino = Leitor.leitores.Find(l => l.CPF == cpfDestino); // Procura o leitor destino pelo CPF
+                if (leitorDestino == null) // Verifica se o leitor destino foi encontrado
+                {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Leitor destino não encontrado!");
                 Console.ResetColor();
-                return;
+                }
             }
+            } while (!ValidarCPF(cpfDestino) || leitorDestino == null);
 
             Console.Write("Digite o título do livro que deseja doar: ");
-            string titulo = Console.ReadLine();
+            string titulo = Console.ReadLine().Trim();
             Livro livro = leitor.LivrosLeitor.Find(l => l.Titulo == titulo);
             if (livro == null) // Verifica se o livro foi encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Livro não encontrado!");
-                Console.ResetColor();
-                return;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Livro não encontrado!");
+            Console.ResetColor();
+            return;
             }
 
             if (leitor.DoarLivroLeitor(cpfDestino, titulo)) // Doa o livro
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Livro doado com sucesso!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Livro doado com sucesso!");
             }
             else // Mensagem de erro caso o livro não seja encontrado
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Erro ao doar livro.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Erro ao doar livro.");
             }
             Console.ResetColor();
         }
