@@ -6,10 +6,21 @@ namespace Biblioteca
 {
     internal class Leitor
     {
-        internal string Nome { get; set; }
+        internal string Nome
+        {
+            get => _nome;
+            set => _nome = value?.Trim();
+        }
         internal int Idade { get; set; }
-        internal string CPF { get; set; }
+        internal string CPF
+        {
+            get => _cpf;
+            set => _cpf = value?.Trim();
+        }
         internal List<Livro> LivrosLeitor { get; set; } = new List<Livro>();
+
+        private string _nome;
+        private string _cpf;
 
         internal static List<Leitor> leitores = new List<Leitor>();
 
