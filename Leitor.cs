@@ -9,13 +9,27 @@ namespace Biblioteca
         internal string Nome
         {
             get => _nome;
-            set => _nome = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Nome não pode ser nulo ou vazio.");
+                }
+                _nome = value.Trim();
+            }
         }
         internal int Idade { get; set; }
         internal string CPF
         {
             get => _cpf;
-            set => _cpf = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("CPF não pode ser nulo ou vazio.");
+                }
+                _cpf = value.Trim();
+            }
         }
         internal List<Livro> LivrosLeitor { get; set; } = new List<Livro>();
 

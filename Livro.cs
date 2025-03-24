@@ -5,33 +5,75 @@ namespace Biblioteca
         internal string Titulo
         {
             get => _titulo;
-            set => _titulo = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Título não pode ser nulo ou vazio.");
+                }
+                _titulo = value.Trim();
+            }
         }
         internal string SubTitulo
         {
             get => _subTitulo;
-            set => _subTitulo = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Subtítulo não pode ser nulo ou vazio.");
+                }
+                _subTitulo = value.Trim();
+            }
         }
         internal string Escritor
         {
             get => _escritor;
-            set => _escritor = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Escritor não pode ser nulo ou vazio.");
+                }
+                _escritor = value.Trim();
+            }
         }
         internal string Editora
         {
             get => _editora;
-            set => _editora = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Editora não pode ser nula ou vazia.");
+                }
+                _editora = value.Trim();
+            }
         }
         internal string Genero
         {
             get => _genero;
-            set => _genero = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Gênero não pode ser nulo ou vazio.");
+                }
+                _genero = value.Trim();
+            }
         }
         internal int AnoPublicacao { get; set; }
         internal string TipoDaCapa
         {
             get => _tipoDaCapa;
-            set => _tipoDaCapa = value?.Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Tipo da capa não pode ser nulo ou vazio.");
+                }
+                _tipoDaCapa = value.Trim();
+            }
         }
         internal int NumeroDePaginas { get; set; }
 
