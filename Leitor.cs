@@ -28,6 +28,10 @@ namespace Biblioteca
                 {
                     throw new ArgumentException("CPF não pode ser nulo ou vazio.");
                 }
+                if (Leitor.leitores.Any(l => l.CPF == value.Trim() && l != this))
+                {
+                    throw new ArgumentException("CPF já está em uso por outro leitor.");
+                }
                 _cpf = value.Trim();
             }
         }
