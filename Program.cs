@@ -93,36 +93,57 @@
             string nome = Console.ReadLine().Trim();
             if (nome == "0") return;
 
+            int idade;
+            do
+            {
             Console.Write("Digite a idade do leitor ou '0' para sair: ");
             string idadeInput = Console.ReadLine().Trim();
             if (idadeInput == "0") return;
-            int idade = int.Parse(idadeInput);
+
+            if (!int.TryParse(idadeInput, out idade) || idade < 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Idade inválida! Deve ser um número inteiro positivo.");
+                Console.ResetColor();
+            }
+            } while (idade < 0);
 
             string cpf;
+            bool cpfValido;
             do
             {
             Console.Write("Digite o CPF do leitor (11 dígitos) ou '0' para sair: ");
             cpf = Console.ReadLine().Trim();
             if (cpf == "0") return;
 
-            if (!ValidarCPF(cpf)) // Verifica se o CPF é válido
+            if (cpf.Length != 11 || !cpf.All(char.IsDigit))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("CPF inválido! Deve conter exatamente 11 NÚMEROS.");
                 Console.ResetColor();
-            }
-            } while (!ValidarCPF(cpf));
-
-            if (Leitor.CriarLeitor(nome, idade, cpf)) // Cria o leitor
-            {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Leitor cadastrado com sucesso!");
+                cpfValido = false;
             }
             else
             {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Erro: Este CPF já está em uso."); // Mensagem de erro caso o CPF já esteja em uso
+                cpfValido = ValidarCPF(cpf);
+                if (!cpfValido)
+                {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CPF inválido! Por favor, insira um CPF válido.");
+                Console.ResetColor();
+                }
+                else if (!Leitor.CriarLeitor(nome, idade, cpf)) // Tenta criar o leitor
+                {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Erro: Este CPF já está em uso. Tente novamente.");
+                Console.ResetColor();
+                cpfValido = false; // Força a repetição do loop
+                }
             }
+            } while (!cpfValido);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Leitor cadastrado com sucesso!");
             Console.ResetColor();
         }
 
@@ -343,6 +364,8 @@
             }
             } while (!ValidarCPF(cpf) || leitor == null);
 
+            Console.Write("Digite o ISBN do livro: ");
+            string isbn = Console.ReadLine().Trim();
             Console.Write("Digite o título do livro: ");
             string titulo = Console.ReadLine().Trim();
             Console.Write("Digite o subtitulo do livro: ");
@@ -360,7 +383,7 @@
             Console.Write("Digite o número de páginas do livro: ");
             int numeroDePaginas = int.Parse(Console.ReadLine().Trim());
 
-            Livro livro = new Livro(titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas); // Cria um novo livro
+            Livro livro = new Livro(isbn, titulo, subTitulo, escritor, editora, genero, anoPublicacao, tipoDaCapa, numeroDePaginas); // Cria um novo livro
             leitor.AdicionarLivro(livro); // Adiciona o livro ao leitor
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Livro adicionado com sucesso!");

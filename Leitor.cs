@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Biblioteca
 {
     internal class Leitor
     {
+        private string _nome;
+        private string _cpf;
+        private int _idade;
+
         internal string Nome
         {
             get => _nome;
@@ -18,7 +18,20 @@ namespace Biblioteca
                 _nome = value.Trim();
             }
         }
-        internal int Idade { get; set; }
+
+        internal int Idade
+        {
+            get => _idade;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Idade não pode ser negativa.");
+                }
+                _idade = value;
+            }
+        }
+
         internal string CPF
         {
             get => _cpf;
@@ -28,17 +41,15 @@ namespace Biblioteca
                 {
                     throw new ArgumentException("CPF não pode ser nulo ou vazio.");
                 }
-                if (Leitor.leitores.Any(l => l.CPF == value.Trim() && l != this))
+                if (leitores.Any(l => l.CPF == value.Trim() && l != this))
                 {
                     throw new ArgumentException("CPF já está em uso por outro leitor.");
                 }
                 _cpf = value.Trim();
             }
         }
-        internal List<Livro> LivrosLeitor { get; set; } = new List<Livro>();
 
-        private string _nome;
-        private string _cpf;
+        internal List<Livro> LivrosLeitor { get; set; } = new List<Livro>();
 
         internal static List<Leitor> leitores = new List<Leitor>();
 
